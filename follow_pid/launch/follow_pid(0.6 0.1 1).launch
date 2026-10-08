@@ -1,0 +1,25 @@
+
+<launch>
+
+    <!--param name="linear_x_p" value="0.6"/>
+    <param name="linear_x_d" value="0.22"/-->
+    
+    <param name="linear_x_p" value="0.5"/>
+    <param name="linear_x_d" value="0.4"/>
+    
+    <param name="linear_z_p" value="0.5"/>
+    <param name="linear_z_d" value="0.33"/>
+    
+    <param name="yaw_rate_p" value="0.8"/>
+    <param name="yaw_rate_d" value="1.0"/>
+    
+    <param name="target_x_angle"  value="0"/>
+    <param name="target_distance" value="1500"/>
+    <param name="target_hgt" value="0"/>
+    
+    <param name="x_angle_threshold" value="0.02"/>
+    <param name="distance_threshold" value="100"/>
+    <param name="hgt_threshold" value="2000"/> 
+     
+  <node pkg="follow_pid" type="follow_pid" name="follow_pid" output="screen"/>
+</launch>

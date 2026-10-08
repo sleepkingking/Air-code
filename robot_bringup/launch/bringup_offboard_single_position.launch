@@ -1,0 +1,9 @@
+<launch> 
+    
+	<!--启动mavros节点 -->
+    <include file="$(find robot_bringup)/launch/px4.launch" />
+
+	<node name='offboard_single_position' pkg="offboard_single_position" type="offboard_single_position" output="screen" />
+
+</launch>
+

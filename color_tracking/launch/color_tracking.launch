@@ -1,0 +1,26 @@
+<launch>
+
+  <!-- 开启RGB摄像头  -->
+  <!--include file="$(find realsense2_camera)/launch/rs_rgbd.launch" /-->
+
+
+  <!-- 开启色块跟踪节点  -->
+  <node name='color_tracking' pkg="color_tracking" type="VisualFollow_px4_ctrl.py" output="screen">
+    <!--  上传相关参数到参数服务器 -->
+    <rosparam ns='visual_angle'>
+      vertical :   46.7
+      horizontal : 60
+    </rosparam>
+  </node>
+  
+  <!--include file='$(find simple_follower)/launch/nodes/visualfollow.launch' /-->
+  
+  <!-- px4控制节点-->
+  <!--node name='landing_node' pkg="simple_follower" type="px4_control" output="screen" /-->
+  <!-- 开启机器人底层相关节点  -->
+  <!--include file="$(find robot_bringup)/launch/px4.launch" /-->
+   
+  <!--node name="ros_nav_quadrotor_node" pkg="px4_control" type="ros_nav_quadrotor_node" /-->   
+  
+
+</launch>

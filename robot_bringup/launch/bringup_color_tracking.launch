@@ -1,0 +1,20 @@
+<launch> 
+
+  <!--1、开启Mavros通信节点  -->
+  <include file="$(find robot_bringup)/launch/px4.launch" />
+
+  <!--2、开启RGB摄像头  -->
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch" />
+
+  <!--3、开启色块跟踪节点  -->
+  <node name='VisualFollow_px4_ctrl' pkg="color_tracking" type="VisualFollow_px4_ctrl.py" output="screen">
+    <rosparam ns='visual_angle'>
+      vertical :   46.7
+      horizontal : 60
+    </rosparam>
+  </node>
+    
+  <!--4、开启无人机运动控制节点-->
+  <node name='color_tracking' pkg="color_tracking" type="color_tracking" output="screen" />
+</launch>
+

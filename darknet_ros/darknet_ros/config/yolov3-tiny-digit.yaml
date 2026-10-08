@@ -1,0 +1,21 @@
+yolo_model:
+
+  config_file:
+    name: yolov3-tiny-digit.cfg
+  weight_file:
+    name: yolov3-tiny-digit_80000.weights
+  threshold:
+    value: 0.1
+  detection_classes:
+    names:
+      - zero
+      - one
+      - two
+      - three
+      - four
+      - five
+      - six
+      - seven
+      - eight
+      - nine
+      

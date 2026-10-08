@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- Console launch prefix -->
+  <arg name="launch_prefix" default=""/>
+  <arg name="image" default="/usb_cam/image_raw" />
+
+  <!-- Config and weights folder. -->
+  <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
+  <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
+
+  <!-- ROS and network parameter files -->
+  <arg name="ros_param_file"             default="$(find darknet_ros)/config/ros.yaml"/>
+  
+  <!-- 使用yolov4进行常用物体的识别，包括人脸识别、行人识别、键盘、桌椅识别等，具体内容可直接查看yaml文件即可 -->
+  <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov4-tiny-dibiao.yaml"/>
+  
+  <!-- 使用yolov3进行数字识别，默认参数以及权重文件可以识别数字0-9 -->
+  <!--arg name="network_param_file"         default="$(find darknet_ros)/config/yolov4-tiny.yaml"/-->
+
+
+
+  <!-- Load parameters -->
+  <rosparam command="load" ns="darknet_ros" file="$(arg ros_param_file)"/>
+  <rosparam command="load" ns="darknet_ros" file="$(arg network_param_file)"/>
+
+  <!-- Start darknet and ros wrapper -->
+  <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen" launch-prefix="$(arg launch_prefix)">
+    <param name="weights_path"          value="$(arg yolo_weights_path)" />
+    <param name="config_path"           value="$(arg yolo_config_path)" />
+    <remap from="camera/rgb/image_raw"  to="$(arg image)" />
+  </node>
+
+</launch>
